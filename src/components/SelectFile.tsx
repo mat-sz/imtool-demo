@@ -3,7 +3,7 @@ import { useDropzone } from 'react-dropzone';
 
 export interface SelectFileProps {
     onFile: (file: File) => void
-}
+};
 
 export const SelectFile: React.FC<SelectFileProps> = ({ onFile }) => {
     const onDrop = (files: File[]) => onFile(files[0]);

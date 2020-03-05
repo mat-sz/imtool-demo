@@ -12,6 +12,11 @@ html, body {
 body {
     display: flex;
     justify-content: center;
+
+    & > * {
+        margin-top: 2rem;
+        max-width: 700px;
+    }
 }
 
 h1 {
@@ -29,8 +34,6 @@ h2, h3 {
     box-shadow: 0 20px 10px -15px rgba(0, 0, 0, 0.3);
     border-radius: 5px;
     transition: 0.1s ease-in-out all;
-    margin-top: 2rem;
-    max-width: 700px;
 }
 
 .dropzone {
@@ -63,5 +66,31 @@ h2, h3 {
     img {
         max-width: 100%;
         border-radius: 5px;
+    }
+}
+
+button {
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    background: rgba(0, 0, 0, 0.05);
+    border: none;
+    border-radius: 5px;
+    transition: 0.1s ease-in-out all;
+    box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+
+    &:hover {
+        background: rgba(0, 0, 0, 0.05);
+        box-shadow: 0 5px 10px -5px rgba(0, 0, 0, 0.3);
+    }
+}
+
+.button-bar {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+
+    button {
+        margin: 1rem;
     }
 }

@@ -5,12 +5,15 @@ import { fromImage } from 'imtool';
 import './App.scss';
 import { SelectFile } from './components/SelectFile';
 import { FileDetails } from './components/FileDetails';
+import { Effects } from './components/Effects';
+import { ImageEffect } from './Effects';
 
 function App() {
     const [ file, setFile ] = useState<File>();
     const [ tool, setTool ] = useState<ImTool>();
     const [ inputURL, setInputURL ] = useState<string>();
     const [ outputURL, setOutputURL ] = useState<string>();
+    const [ effects, setEffects ] = useState<ImageEffect[]>([]);
 
     useEffect(() => {
         if (file) {
@@ -27,13 +30,19 @@ function App() {
                 setOutputURL(url);
             });
         }
-    }, [ tool ])
+    }, [ tool ]);
 
     return (
         <div className="App">
             <h1>imtool</h1>
-            <SelectFile onFile={setFile} />
-            <FileDetails tool={tool} inputURL={inputURL} outputURL={outputURL} />
+            { !tool ?
+                <SelectFile onFile={setFile} />
+            :
+                <>
+                    <FileDetails tool={tool} inputURL={inputURL} outputURL={outputURL} />
+                    <Effects setEffects={setEffects} effects={effects} />
+                </>
+            }
         </div>
     );
 }

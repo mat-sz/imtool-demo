@@ -5,7 +5,7 @@ export interface FileDetailsProps {
     tool: ImTool | undefined,
     inputURL: string | undefined,
     outputURL: string | undefined
-}
+};
 
 export const FileDetails: React.FC<FileDetailsProps> = ({ tool, inputURL, outputURL }) => {
     if (!tool || !inputURL) return null;
