@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Effect as EffectType, ImageEffect, effects as effectsArray } from '../Effects';
+import { ImageEffect, effects as effectsArray } from '../Effects';
 import { EffectBar } from './EffectBar';
 
 export interface EffectBarProps {
