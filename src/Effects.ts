@@ -7,6 +7,7 @@ export enum EffectType {
 };
 
 export interface ImageEffect {
+    id: string,
     type: EffectType,
     arguments: any,
 };
