@@ -15,13 +15,19 @@ function App() {
     useEffect(() => {
         if (file) {
             fromImage(file).then(
-                (tool) => {
-                    tool.toDataURL().then((url) => setInputURL(url));
-                    setTool(tool);
-                }
+                (tool) => setTool(tool)
             );
         }
     }, [ file ]);
+
+    useEffect(() => {
+        if (tool) {
+            tool.toDataURL().then((url) => {
+                setInputURL(url);
+                setOutputURL(url);
+            });
+        }
+    }, [ tool ])
 
     return (
         <div className="App">
