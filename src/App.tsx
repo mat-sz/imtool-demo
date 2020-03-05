@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
+
 import './App.scss';
+import { SelectFile } from './components/SelectFile';
 
 function App() {
-  return (
-    <div className="App">
-    </div>
-  );
+    const [ file, setFile ] = useState<File>();
+
+    return (
+        <div className="App">
+            <h1>imtool demo</h1>
+            <SelectFile onFile={setFile} />
+        </div>
+    );
 }
 
 export default App;
