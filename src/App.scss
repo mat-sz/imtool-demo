@@ -63,6 +63,23 @@ h2, h3 {
     grid-gap: 2rem;
     padding: 2rem;
     text-align: center;
+
+    .arrow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+            height: 100px;
+            fill: rgba(0, 0, 0, 0.3);
+        }
+    }
+
+    .preview {
+        div {
+            padding-bottom: 5px;
+        }
+    }
     
     img {
         max-width: 100%;
