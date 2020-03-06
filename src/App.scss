@@ -108,7 +108,8 @@ button {
     flex-wrap: wrap;
     margin-top: 2rem;
 
-    button {
+    button, span {
+        padding: 0.5rem 1rem;
         margin: 1rem;
     }
 }

@@ -1,12 +1,19 @@
 import React from 'react';
 import { useDropzone } from 'react-dropzone';
+import { fromImage } from 'imtool';
 
 export interface SelectFileProps {
-    onFile: (file: File) => void
+    setInputURL: React.Dispatch<React.SetStateAction<string | undefined>>
 };
 
-export const SelectFile: React.FC<SelectFileProps> = ({ onFile }) => {
-    const onDrop = (files: File[]) => onFile(files[0]);
+export const SelectFile: React.FC<SelectFileProps> = ({ setInputURL }) => {
+    const onDrop = (files: File[]) => {
+        if (files[0]) {
+            fromImage(files[0]).then(
+                tool => tool.toDataURL().then(url => setInputURL(url))
+            );
+        }
+    };
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop,

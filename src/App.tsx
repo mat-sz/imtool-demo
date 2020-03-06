@@ -3,25 +3,18 @@ import { ImTool } from 'imtool/lib/ImTool';
 import { fromImage } from 'imtool';
 
 import './App.scss';
+
 import { SelectFile } from './components/SelectFile';
+import { CaptureBar } from './components/CaptureBar';
 import { FileDetails } from './components/FileDetails';
 import { Effects } from './components/Effects';
 import { ImageEffect, EffectType } from './Effects';
 
 function App() {
-    const [ file, setFile ] = useState<File>();
     const [ tool, setTool ] = useState<ImTool>();
     const [ inputURL, setInputURL ] = useState<string>();
     const [ outputURL, setOutputURL ] = useState<string>();
     const [ effects, setEffects ] = useState<ImageEffect[]>([]);
-
-    useEffect(() => {
-        if (file) {
-            fromImage(file).then(
-                tool => tool.toDataURL().then(url => setInputURL(url))
-            );
-        }
-    }, [ file ]);
 
     useEffect(() => {
         if (inputURL) {
@@ -58,7 +51,10 @@ function App() {
         <div className="App">
             <h1>imtool</h1>
             { !tool ?
-                <SelectFile onFile={setFile} />
+                <>
+                    <SelectFile setInputURL={setInputURL} />
+                    <CaptureBar setInputURL={setInputURL} />
+                </>
             :
                 <>
                     <FileDetails tool={tool} inputURL={inputURL} outputURL={outputURL} />
