@@ -8,11 +8,11 @@ export interface EffectBarProps {
 };
 
 export const EffectBar: React.FC<EffectBarProps> = ({ setEffects }) => {
-    const EffectButton: React.FC<{ effect: Effect, i: number }> = ({ effect, i }) => {
+    const EffectButton: React.FC<{ effect: Effect }> = ({ effect }) => {
         const onClick = () => {
             setEffects(effects => [...effects, {
                 id: uuid(),
-                type: i,
+                fn: effect.fn,
                 arguments: null
             }]);
         };
@@ -24,7 +24,7 @@ export const EffectBar: React.FC<EffectBarProps> = ({ setEffects }) => {
 
     return (
         <div className="button-bar">
-            { effects.map((effect, i) => <EffectButton effect={effect} i={i} key={i} />) }
+            { effects.map((effect, i) => <EffectButton effect={effect} key={i} />) }
         </div>
     );
 }

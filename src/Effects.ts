@@ -1,40 +1,39 @@
-export enum EffectType {
-    THUMBNAIL,
-    SCALE,
-    CROP,
-    FLIP_V,
-    FLIP_H,
-};
+import { ImTool } from "imtool/lib/ImTool";
+
+type Functions<T> = Pick<T, { 
+    [K in keyof T]: T[K] extends Function ? K : never 
+}[keyof T]>;
 
 export interface ImageEffect {
     id: string,
-    type: EffectType,
+    fn: keyof Functions<ImTool>,
     arguments: any,
 };
 
 export interface Effect {
     name: string,
-
+    fn: keyof Functions<ImTool>,
 };
 
-export const effects: Effect[] = [];
-
-effects[EffectType.CROP] = {
-    name: 'Crop',
-};
-
-effects[EffectType.FLIP_H] = {
-    name: 'Flip horizontally',
-};
-
-effects[EffectType.FLIP_V] = {
-    name: 'Flip vertically',
-};
-
-effects[EffectType.SCALE] = {
-    name: 'Scale',
-};
-
-effects[EffectType.THUMBNAIL] = {
-    name: 'Thumbnail',
-};
+export const effects: Effect[] = [
+    {
+        name: 'Crop',
+        fn: 'crop',
+    },
+    {
+        name: 'Flip horizontally',
+        fn: 'flipH',
+    },
+    {
+        name: 'Flip vertically',
+        fn: 'flipV',
+    },
+    {
+        name: 'Scale',
+        fn: 'scale',
+    },
+    {
+        name: 'Thumbnail',
+        fn: 'thumbnail',
+    }
+];

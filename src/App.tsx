@@ -8,7 +8,7 @@ import { SelectFile } from './components/SelectFile';
 import { CaptureBar } from './components/CaptureBar';
 import { FileDetails } from './components/FileDetails';
 import { Effects } from './components/Effects';
-import { ImageEffect, EffectType } from './Effects';
+import { ImageEffect } from './Effects';
 
 function App() {
     const [ tool, setTool ] = useState<ImTool>();
@@ -20,23 +20,7 @@ function App() {
         if (inputURL) {
             fromImage(inputURL).then((tool) => {
                 for (let imageEffect of effects) {
-                    switch (imageEffect.type) {
-                        case EffectType.FLIP_H:
-                            tool = tool.flipH();
-                            break;
-                        case EffectType.FLIP_V:
-                            tool = tool.flipV();
-                            break;
-                        case EffectType.SCALE:
-                            tool = tool.scale(100, 100);
-                            break;
-                        case EffectType.THUMBNAIL:
-                            tool = tool.thumbnail(100, false);
-                            break;
-                        case EffectType.CROP:
-                            tool = tool.crop(10, 10, 20, 20);
-                            break;
-                    }
+                    (tool[imageEffect.fn] as Function).apply(tool, imageEffect.arguments);
                 }
 
                 tool.toDataURL().then((url) => {

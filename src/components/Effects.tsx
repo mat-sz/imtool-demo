@@ -14,11 +14,11 @@ export const Effects: React.FC<EffectBarProps> = ({ setEffects, effects }) => {
             setEffects(effects => effects.filter(effect => effect.id !== imageEffect.id));
         };
 
-        const effect = effectsArray[imageEffect.type];
+        const effect = effectsArray.find((effect) => effect.fn === imageEffect.fn);
 
         return (
             <div className="effect">
-                <h3>{ effect.name }</h3>
+                <h3>{ effect?.name ?? 'Unknown' }</h3>
                 <button onClick={onClick}>Remove</button>
             </div>
         )
