@@ -14,7 +14,13 @@ function App() {
     const [ tool, setTool ] = useState<ImTool>();
     const [ inputURL, setInputURL ] = useState<string>();
     const [ outputURL, setOutputURL ] = useState<string>();
+    const [ source, setSource ] = useState<string>('fromImage');
     const [ effects, setEffects ] = useState<ImageEffect[]>([]);
+
+    const setImage = (url: string, source: string) => {
+        setSource(source);
+        setInputURL(url);
+    };
 
     useEffect(() => {
         if (inputURL) {
@@ -40,12 +46,12 @@ function App() {
             <h1>imtool</h1>
             { !tool ?
                 <>
-                    <SelectFile setInputURL={setInputURL} />
-                    <CaptureBar setInputURL={setInputURL} />
+                    <SelectFile setImage={setImage} />
+                    <CaptureBar setImage={setImage} />
                 </>
             :
                 <>
-                    <FileDetails tool={tool} inputURL={inputURL} outputURL={outputURL} effects={effects} />
+                    <FileDetails tool={tool} inputURL={inputURL} outputURL={outputURL} effects={effects} source={source} />
                     <Effects setEffects={setEffects} effects={effects} />
                 </>
             }

@@ -7,14 +7,16 @@ export interface FileDetailsProps {
     inputURL?: string,
     outputURL?: string,
     effects?: ImageEffect[],
+    source: string,
 };
 
-export const FileDetails: React.FC<FileDetailsProps> = ({ tool, effects, inputURL, outputURL }) => {
+export const FileDetails: React.FC<FileDetailsProps> = ({ tool, effects, inputURL, outputURL, source }) => {
     if (!tool || !inputURL) return null;
 
     let text: string | undefined;
     if (effects) {
-        text = 'import { fromImage } from \'imtool\';\n\nasync function demo() {\n    const tool = await fromImage(\'image.png\');\n    await tool';
+        const sourceFunction = source === 'fromImage' ? 'fromImage(\'image.png\')' : source + '()';
+        text = 'import { ' + source + ' } from \'imtool\';\n\nasync function demo() {\n    const tool = await ' + sourceFunction + ';\n    await tool';
         for (let effect of effects) {
             text += '.' + effect.fn + '(' + (effect.arguments.reduce((prev, value) => prev === '' ? value : prev + ', ' + value, '')) + ')';
         }
