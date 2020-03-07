@@ -13,7 +13,7 @@ export const EffectBar: React.FC<EffectBarProps> = ({ setEffects }) => {
             setEffects(effects => [...effects, {
                 id: uuid(),
                 fn: effect.fn,
-                arguments: null
+                arguments: effect.arguments ? effect.arguments.map((argument) => argument.defaultValue) : null
             }]);
         };
 
