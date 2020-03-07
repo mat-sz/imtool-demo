@@ -80,6 +80,11 @@ h2, h3 {
             padding-bottom: 5px;
         }
     }
+
+    pre {
+        grid-column: 1 / 4;
+        text-align: left;
+    }
     
     img {
         max-width: 100%;

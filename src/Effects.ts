@@ -7,7 +7,7 @@ type ImToolFunctions = keyof Pick<ImTool, {
 export interface ImageEffect {
     id: string,
     fn: ImToolFunctions,
-    arguments: any,
+    arguments: any[],
 };
 
 export enum EffectArgumentType {

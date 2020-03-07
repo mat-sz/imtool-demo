@@ -45,7 +45,7 @@ function App() {
                 </>
             :
                 <>
-                    <FileDetails tool={tool} inputURL={inputURL} outputURL={outputURL} />
+                    <FileDetails tool={tool} inputURL={inputURL} outputURL={outputURL} effects={effects} />
                     <Effects setEffects={setEffects} effects={effects} />
                 </>
             }

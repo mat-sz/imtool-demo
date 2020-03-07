@@ -1,14 +1,25 @@
 import React from 'react';
 import { ImTool } from 'imtool/lib/ImTool';
+import { ImageEffect } from '../Effects';
 
 export interface FileDetailsProps {
-    tool: ImTool | undefined,
-    inputURL: string | undefined,
-    outputURL: string | undefined
+    tool?: ImTool,
+    inputURL?: string,
+    outputURL?: string,
+    effects?: ImageEffect[],
 };
 
-export const FileDetails: React.FC<FileDetailsProps> = ({ tool, inputURL, outputURL }) => {
+export const FileDetails: React.FC<FileDetailsProps> = ({ tool, effects, inputURL, outputURL }) => {
     if (!tool || !inputURL) return null;
+
+    let text: string | undefined;
+    if (effects) {
+        text = 'import { fromImage } from \'imtool\';\n\nasync function demo() {\n    const tool = await fromImage(\'image.png\');\n    await tool';
+        for (let effect of effects) {
+            text += '.' + effect.fn + '(' + (effect.arguments.reduce((prev, value) => prev === '' ? value : prev + ', ' + value, '')) + ')';
+        }
+        text += '.toDataURL();\n}';
+    }
 
     return (
         <div className="details">
@@ -30,6 +41,11 @@ export const FileDetails: React.FC<FileDetailsProps> = ({ tool, inputURL, output
                         <div>{ tool.width }x{ tool.height }</div>
                     </div>
                 </>
+            ) : null}
+            { text ? (
+                <pre>
+                    { text }
+                </pre>
             ) : null}
         </div>
     );
