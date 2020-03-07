@@ -20,7 +20,11 @@ function App() {
         if (inputURL) {
             fromImage(inputURL).then((tool) => {
                 for (let imageEffect of effects) {
-                    (tool[imageEffect.fn] as Function).apply(tool, imageEffect.arguments);
+                    try {
+                        (tool[imageEffect.fn] as Function).apply(tool, imageEffect.arguments);
+                    } catch (e) {
+                        // TODO: display the error
+                    }
                 }
 
                 tool.toDataURL().then((url) => {

@@ -1,13 +1,68 @@
 import React from 'react';
 
-import { ImageEffect, effects } from '../Effects';
+import { ImageEffect, effects, EffectArgument, EffectArgumentType } from '../Effects';
 
 export interface EffectProps {
     setEffects: React.Dispatch<React.SetStateAction<ImageEffect[]>>,
     imageEffect: ImageEffect,
-}
+};
+
+interface EffectArgumentRowProps {
+    argument: EffectArgument,
+    i: number,
+    setEffects: React.Dispatch<React.SetStateAction<ImageEffect[]>>,
+    imageEffect: ImageEffect,
+};
+
+
+const EffectArgumentRow: React.FC<EffectArgumentRowProps> = ({ argument, i, setEffects, imageEffect }) => {
+    const updateEffect = (value: any) => {
+        setEffects(effects => effects.map(effect => {
+            if (effect.id === imageEffect.id) {
+                effect.arguments[i] = value;
+            }
+            return effect;
+        }));
+    };
+
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => updateEffect(e.target.value);
+    const onChangeCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => updateEffect(e.target.checked);
+    const value = imageEffect.arguments[i];
+
+    switch (argument.type) {
+        case EffectArgumentType.BOOLEAN:
+            return (
+                <tr>
+                    <td>{ argument.name }</td>
+                    <td><input type="checkbox" defaultChecked={value} onChange={onChangeCheckbox} /></td>
+                </tr>
+            );
+        case EffectArgumentType.NUMBER:
+            return (
+                <tr>
+                    <td>{ argument.name }</td>
+                    <td><input type="number" defaultValue={value} min="0" onChange={onChange} /></td>
+                </tr>
+            );
+        case EffectArgumentType.TEXT:
+            return (
+                <tr>
+                    <td>{ argument.name }</td>
+                    <td><input type="text" defaultValue={value} onChange={onChange} /></td>
+                </tr>
+            );
+        default:
+            return (
+                <tr>
+                    <td>{ argument.name }</td>
+                    <td>{ value }</td>
+                </tr>
+            );
+    }
+};
 
 export const Effect: React.FC<EffectProps> = ({ imageEffect, setEffects }) => {
+
     const onClick = () => {
         setEffects(effects => effects.filter(effect => effect.id !== imageEffect.id));
     };
@@ -35,10 +90,7 @@ export const Effect: React.FC<EffectProps> = ({ imageEffect, setEffects }) => {
                 <tbody>
                     {
                         effect.arguments.map((argument, i) => (
-                            <tr>
-                                <td>{ argument.name }</td>
-                                <td>{ imageEffect.arguments[i] ?? argument.defaultValue }</td>
-                            </tr>
+                            <EffectArgumentRow argument={argument} i={i} key={i} setEffects={setEffects} imageEffect={imageEffect} />
                         ))
                     }
                 </tbody>
