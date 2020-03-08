@@ -13,6 +13,7 @@ import { Effects } from './components/Effects';
 import { ImageEffect } from './Effects';
 import { ErrorBar } from './components/ErrorBar';
 import { Library } from './components/Library';
+import { LoadingOverlay } from './components/LoadingOverlay';
 
 function App() {
     const [ tool, setTool ] = useState<ImTool>();
@@ -57,6 +58,7 @@ function App() {
     return (
         <div className="App">
             <GithubCorner href="https://github.com/mat-sz/imtool-demo" octoColor="#333" bannerColor="#ccc" />
+            <LoadingOverlay active={loading} />
             <h1>imtool</h1>
             <Library />
             <ErrorBar error={error} />
