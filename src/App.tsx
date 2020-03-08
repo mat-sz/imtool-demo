@@ -3,6 +3,7 @@ import { ImTool } from 'imtool/lib/ImTool';
 import { fromImage } from 'imtool';
 
 import './App.scss';
+import 'react-image-lightbox/style.css';
 
 import { SelectFile } from './components/SelectFile';
 import { CaptureBar } from './components/CaptureBar';

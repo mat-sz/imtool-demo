@@ -94,6 +94,10 @@ section {
         div {
             padding-bottom: 5px;
         }
+        
+        img {
+            padding: 0;
+        }
     }
 
     pre {
@@ -107,7 +111,7 @@ section {
     }
 }
 
-button {
+button:not(.ril__builtinButton), .preview img {
     cursor: pointer;
     padding: 0.5rem 1rem;
     background: rgba(0, 0, 0, 0.05);

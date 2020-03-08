@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Lightbox from 'react-image-lightbox';
 import { ImTool } from 'imtool/lib/ImTool';
+
 import { ImageEffect } from '../Effects';
 
 export interface FileDetailsProps {
@@ -11,6 +13,19 @@ export interface FileDetailsProps {
 };
 
 export const FileDetails: React.FC<FileDetailsProps> = ({ tool, effects, inputURL, outputURL, source }) => {
+    const [ lightboxSrc, setLightboxSrc ] = useState<string>();
+    const [ lightboxTitle, setLightboxTitle ] = useState<string>('Input image');
+
+    const closeLightbox = () => setLightboxSrc(undefined);
+    const openOutput = () => {
+        setLightboxTitle('Output image');
+        setLightboxSrc(outputURL);
+    };
+    const openInput = () => {
+        setLightboxTitle('Input image');
+        setLightboxSrc(inputURL);  
+    };
+
     if (!tool || !inputURL) return null;
 
     let text: string | undefined;
@@ -25,9 +40,16 @@ export const FileDetails: React.FC<FileDetailsProps> = ({ tool, effects, inputUR
 
     return (
         <section className="details">
+            { lightboxSrc ?
+            <Lightbox
+                mainSrc={lightboxSrc}
+                onCloseRequest={closeLightbox}
+                imageTitle={lightboxTitle}
+            />
+            : null }
             <div className="preview">
                 <div>Input:</div>
-                <img src={inputURL} alt="Input" />
+                <img src={inputURL} alt="Input" onClick={openInput} />
                 <div>{ tool.originalWidth }x{ tool.originalHeight }</div>
             </div>
             { outputURL ? (
@@ -39,7 +61,7 @@ export const FileDetails: React.FC<FileDetailsProps> = ({ tool, effects, inputUR
                     </div>
                     <div className="preview">
                         <div>Output:</div>
-                        <img src={outputURL} alt="Output" />
+                        <img src={outputURL} alt="Output" onClick={openOutput} />
                         <div>{ tool.width }x{ tool.height }</div>
                     </div>
                 </>
