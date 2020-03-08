@@ -15,11 +15,14 @@ import { Library } from './components/Library';
 
 function App() {
     const [ tool, setTool ] = useState<ImTool>();
+
+    const [ error, setError ] = useState<string>();
+    const [ loading, setLoading ] = useState<boolean>(false);
     const [ inputURL, setInputURL ] = useState<string>();
     const [ outputURL, setOutputURL ] = useState<string>();
     const [ source, setSource ] = useState<string>('fromImage');
+
     const [ effects, setEffects ] = useState<ImageEffect[]>([]);
-    const [ error, setError ] = useState<string>();
     const [ effectErrors, setEffectErrors ] = useState<{ [k: string]: string }>({});
 
     const setImage = (url: string, source: string) => {
@@ -57,8 +60,8 @@ function App() {
             <ErrorBar error={error} />
             { !tool ?
                 <>
-                    <SelectFile setImage={setImage} setError={setError} />
-                    <CaptureBar setImage={setImage} setError={setError} />
+                    <SelectFile setImage={setImage} setError={setError} setLoading={setLoading} />
+                    <CaptureBar setImage={setImage} setError={setError} setLoading={setLoading} />
                 </>
             :
                 <>
