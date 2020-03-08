@@ -9,6 +9,7 @@ import { CaptureBar } from './components/CaptureBar';
 import { FileDetails } from './components/FileDetails';
 import { Effects } from './components/Effects';
 import { ImageEffect } from './Effects';
+import { ErrorBar } from './components/ErrorBar';
 
 function App() {
     const [ tool, setTool ] = useState<ImTool>();
@@ -16,6 +17,7 @@ function App() {
     const [ outputURL, setOutputURL ] = useState<string>();
     const [ source, setSource ] = useState<string>('fromImage');
     const [ effects, setEffects ] = useState<ImageEffect[]>([]);
+    const [ error, setError ] = useState<string>();
 
     const setImage = (url: string, source: string) => {
         setSource(source);
@@ -29,7 +31,7 @@ function App() {
                     try {
                         (tool[imageEffect.fn] as Function).apply(tool, imageEffect.arguments);
                     } catch (e) {
-                        // TODO: display the error
+                        setError(e.toString());
                     }
                 }
 
@@ -44,10 +46,11 @@ function App() {
     return (
         <div className="App">
             <h1>imtool</h1>
+            <ErrorBar error={error} />
             { !tool ?
                 <>
-                    <SelectFile setImage={setImage} />
-                    <CaptureBar setImage={setImage} />
+                    <SelectFile setImage={setImage} setError={setError} />
+                    <CaptureBar setImage={setImage} setError={setError} />
                 </>
             :
                 <>

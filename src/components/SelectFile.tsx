@@ -4,14 +4,15 @@ import { fromImage } from 'imtool';
 
 export interface SelectFileProps {
     setImage: (url: string, source: string) => void,
+    setError: React.Dispatch<React.SetStateAction<string | undefined>>,
 };
 
-export const SelectFile: React.FC<SelectFileProps> = ({ setImage }) => {
+export const SelectFile: React.FC<SelectFileProps> = ({ setImage, setError }) => {
     const onDrop = (files: File[]) => {
         if (files[0]) {
             fromImage(files[0]).then(
                 tool => tool.toDataURL().then(url => setImage(url, 'fromImage'))
-            );
+            ).catch(e => setError(e.toString()));
         }
     };
 
