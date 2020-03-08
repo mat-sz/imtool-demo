@@ -5,6 +5,7 @@ import { ImageEffect, effects, EffectArgument, EffectArgumentType } from '../Eff
 export interface EffectProps {
     setEffects: React.Dispatch<React.SetStateAction<ImageEffect[]>>,
     imageEffect: ImageEffect,
+    error?: string,
 };
 
 interface EffectArgumentRowProps {
@@ -61,7 +62,7 @@ const EffectArgumentRow: React.FC<EffectArgumentRowProps> = ({ argument, i, setE
     }
 };
 
-export const Effect: React.FC<EffectProps> = ({ imageEffect, setEffects }) => {
+export const Effect: React.FC<EffectProps> = ({ imageEffect, setEffects, error }) => {
 
     const onClick = () => {
         setEffects(effects => effects.filter(effect => effect.id !== imageEffect.id));
@@ -79,6 +80,11 @@ export const Effect: React.FC<EffectProps> = ({ imageEffect, setEffects }) => {
     return (
         <div className="effect">
             <h3>{ effect.name }</h3>
+            { error ? 
+            <div className="error-bar">
+                { error }
+            </div>
+            : null }
             { effect.arguments ? 
             <table>
                 <thead>

@@ -18,6 +18,7 @@ function App() {
     const [ source, setSource ] = useState<string>('fromImage');
     const [ effects, setEffects ] = useState<ImageEffect[]>([]);
     const [ error, setError ] = useState<string>();
+    const [ effectErrors, setEffectErrors ] = useState<{ [k: string]: string }>({});
 
     const setImage = (url: string, source: string) => {
         setSource(source);
@@ -28,11 +29,15 @@ function App() {
         if (inputURL) {
             fromImage(inputURL).then((tool) => {
                 for (let imageEffect of effects) {
+                    const errors: { [k: string]: string } = {};
+
                     try {
                         (tool[imageEffect.fn] as Function).apply(tool, imageEffect.arguments);
                     } catch (e) {
-                        setError(e.toString());
+                        errors[imageEffect.id] = e.toString();
                     }
+
+                    setEffectErrors(errors);
                 }
 
                 tool.toDataURL().then((url) => {
@@ -55,7 +60,7 @@ function App() {
             :
                 <>
                     <FileDetails tool={tool} inputURL={inputURL} outputURL={outputURL} effects={effects} source={source} />
-                    <Effects setEffects={setEffects} effects={effects} />
+                    <Effects setEffects={setEffects} effects={effects} effectErrors={effectErrors} />
                 </>
             }
         </div>

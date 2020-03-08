@@ -7,12 +7,13 @@ import { Effect } from './Effect';
 export interface EffectBarProps {
     setEffects: React.Dispatch<React.SetStateAction<ImageEffect[]>>,
     effects: ImageEffect[],
+    effectErrors: { [k: string]: string },
 };
 
-export const Effects: React.FC<EffectBarProps> = ({ setEffects, effects }) => (
+export const Effects: React.FC<EffectBarProps> = ({ setEffects, effects, effectErrors }) => (
     <div className="effects">
         { effects.map(effect =>
-            <Effect imageEffect={effect} setEffects={setEffects} key={effect.id} />
+            <Effect imageEffect={effect} setEffects={setEffects} key={effect.id} error={effectErrors[effect.id]} />
         ) }
         <EffectBar setEffects={setEffects} />
     </div>
