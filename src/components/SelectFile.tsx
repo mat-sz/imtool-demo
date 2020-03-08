@@ -22,9 +22,9 @@ export const SelectFile: React.FC<SelectFileProps> = ({ setImage, setError }) =>
     });
 
     return (
-        <div {...getRootProps()} className={"dropzone " + (isDragActive ? 'active' : '')}>
+        <section {...getRootProps()} className={"dropzone " + (isDragActive ? 'active' : '')}>
             <input {...getInputProps({ style: {} })} />
             <span>Select your image file by clicking or dropping a file on this area.</span>
-        </div>
+        </section>
     );
 }

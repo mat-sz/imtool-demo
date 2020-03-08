@@ -78,7 +78,7 @@ export const Effect: React.FC<EffectProps> = ({ imageEffect, setEffects, error }
     }
 
     return (
-        <div className="effect">
+        <section className="effect">
             <h3>{ effect.name }</h3>
             { error ? 
             <div className="error-bar">
@@ -103,6 +103,6 @@ export const Effect: React.FC<EffectProps> = ({ imageEffect, setEffects, error }
             </table>
             : null }
             <button onClick={onClick}>Remove</button>
-        </div>
+        </section>
     )
 };

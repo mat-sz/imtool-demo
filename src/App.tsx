@@ -10,6 +10,7 @@ import { FileDetails } from './components/FileDetails';
 import { Effects } from './components/Effects';
 import { ImageEffect } from './Effects';
 import { ErrorBar } from './components/ErrorBar';
+import { Library } from './components/Library';
 
 function App() {
     const [ tool, setTool ] = useState<ImTool>();
@@ -51,6 +52,7 @@ function App() {
     return (
         <div className="App">
             <h1>imtool</h1>
+            <Library />
             <ErrorBar error={error} />
             { !tool ?
                 <>

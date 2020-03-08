@@ -24,7 +24,7 @@ export const FileDetails: React.FC<FileDetailsProps> = ({ tool, effects, inputUR
     }
 
     return (
-        <div className="details">
+        <section className="details">
             <div className="preview">
                 <div>Input:</div>
                 <img src={inputURL} alt="Input" />
@@ -49,6 +49,6 @@ export const FileDetails: React.FC<FileDetailsProps> = ({ tool, effects, inputUR
                     { text }
                 </pre>
             ) : null}
-        </div>
+        </section>
     );
 }

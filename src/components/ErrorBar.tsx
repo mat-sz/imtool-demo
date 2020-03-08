@@ -10,8 +10,8 @@ export const ErrorBar: React.FC<ErrorBarProps> = ({ error }) => {
     }
 
     return (
-        <div className="error-bar">
+        <section className="error-bar">
             { error }
-        </div>
+        </section>
     );
 }
