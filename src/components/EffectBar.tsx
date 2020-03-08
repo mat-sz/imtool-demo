@@ -23,8 +23,8 @@ export const EffectBar: React.FC<EffectBarProps> = ({ setEffects }) => {
     };
 
     return (
-        <div className="button-bar">
+        <section className="button-bar">
             { effects.map((effect, i) => <EffectButton effect={effect} key={i} />) }
-        </div>
+        </section>
     );
 }

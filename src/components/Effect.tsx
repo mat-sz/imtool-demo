@@ -79,7 +79,10 @@ export const Effect: React.FC<EffectProps> = ({ imageEffect, setEffects, error }
 
     return (
         <section className="effect">
-            <h3>{ effect.name }</h3>
+            <div className="effect-header">
+                <h3>{ effect.name }</h3>
+                <button onClick={onClick}>Remove</button>
+            </div>
             { error ? 
             <div className="error-bar">
                 { error }
@@ -87,12 +90,6 @@ export const Effect: React.FC<EffectProps> = ({ imageEffect, setEffects, error }
             : null }
             { effect.arguments ? 
             <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Value</th>
-                    </tr>
-                </thead>
                 <tbody>
                     {
                         effect.arguments.map((argument, i) => (
@@ -102,7 +99,6 @@ export const Effect: React.FC<EffectProps> = ({ imageEffect, setEffects, error }
                 </tbody>
             </table>
             : null }
-            <button onClick={onClick}>Remove</button>
         </section>
     )
 };

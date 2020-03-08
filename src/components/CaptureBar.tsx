@@ -26,11 +26,11 @@ export const CaptureBar: React.FC<CaptureBarProps> = ({ setImage, setError }) =>
     };
 
     return (
-        <div className="button-bar">
+        <section className="button-bar">
             <span>...or capture from:</span>
             <button onClick={example}>Example image</button>
             <button onClick={webcam}>Webcam</button>
             <button onClick={screen}>Screen</button>
-        </div>
+        </section>
     );
 }
