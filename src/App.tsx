@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import GithubCorner from 'react-github-corner';
 import { ImTool } from 'imtool/lib/ImTool';
 import { fromImage } from 'imtool';
 
@@ -55,6 +56,7 @@ function App() {
 
     return (
         <div className="App">
+            <GithubCorner href="https://github.com/mat-sz/imtool-demo" octoColor="#333" bannerColor="#ccc" />
             <h1>imtool</h1>
             <Library />
             <ErrorBar error={error} />
