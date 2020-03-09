@@ -30,7 +30,7 @@ export const CaptureBar: React.FC<CaptureBarProps> = ({ setImage, setError, setL
 
     const example = () => {
         setLoading(true);
-        fromImage('/example.jpg').then(
+        fromImage('./example.jpg').then(
             tool => tool.toDataURL()
         )
         .then(url => setImage(url, 'fromImage'))
