@@ -29,6 +29,7 @@ function App() {
 
     const setImage = (url: string, source: string) => {
         setSource(source);
+        setError(undefined);
         setInputURL(url);
     };
 
