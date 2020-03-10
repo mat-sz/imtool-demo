@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import GithubCorner from 'react-github-corner';
 import { ImTool } from 'imtool/lib/ImTool';
 import { fromImage } from 'imtool';
@@ -28,28 +28,26 @@ function App() {
     const [ effects, setEffects ] = useState<ImageEffect[]>([]);
     const [ effectErrors, setEffectErrors ] = useState<{ [k: string]: string }>({});
 
-    const setImage = (url: string, source: string) => {
+    const setImage = useCallback((url: string, source: string) => {
         setSource(source);
         setError(undefined);
         setInputURL(url);
-    };
+    }, [ setSource, setError, setInputURL ]);
 
     useEffect(() => {
         if (inputURL) {
             fromImage(inputURL).then((tool) => {
+                const errors: { [k: string]: string } = {};
                 for (let imageEffect of effects) {
-                    const errors: { [k: string]: string } = {};
-
                     try {
                         (tool[imageEffect.fn] as Function).apply(tool, imageEffect.arguments);
                     } catch (e) {
                         errors[imageEffect.id] = e.toString();
                     }
-
-                    setEffectErrors(errors);
                 }
 
                 tool.toDataURL().then((url) => {
+                    setEffectErrors(errors);
                     setTool(tool);
                     setOutputURL(url);
                 });
@@ -63,10 +61,10 @@ function App() {
             <LoadingOverlay active={loading} />
             <h1>imtool</h1>
             <Library />
-            <ErrorBar error={error} />
             <AnimatePresence>
-            { !tool ?
+            { !inputURL ?
                 <>
+                    <ErrorBar key="error-bar" error={error} />
                     <SelectFile key="select-file" setImage={setImage} setError={setError} setLoading={setLoading} />
                     <CaptureBar key="capture-bar" setImage={setImage} setError={setError} setLoading={setLoading} />
                 </>

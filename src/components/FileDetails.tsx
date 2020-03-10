@@ -67,12 +67,12 @@ export const FileDetails: React.FC<FileDetailsProps> = ({ tool, effects, inputUR
                         <div>{ tool.width }x{ tool.height }</div>
                     </div>
                 </>
-            ) : null}
+            ) : null }
             { text ? (
                 <pre>
                     { text }
                 </pre>
-            ) : null}
+            ) : null }
         </motion.section>
     );
 }
