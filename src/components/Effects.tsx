@@ -3,6 +3,7 @@ import React from 'react';
 import { ImageEffect } from '../Effects';
 import { EffectBar } from './EffectBar';
 import { Effect } from './Effect';
+import { AnimatePresence } from 'framer-motion';
 
 export interface EffectBarProps {
     setEffects: React.Dispatch<React.SetStateAction<ImageEffect[]>>,
@@ -12,9 +13,13 @@ export interface EffectBarProps {
 
 export const Effects: React.FC<EffectBarProps> = ({ setEffects, effects, effectErrors }) => (
     <div className="effects">
-        { effects.map(effect =>
-            <Effect imageEffect={effect} setEffects={setEffects} key={effect.id} error={effectErrors[effect.id]} />
-        ) }
-        <EffectBar setEffects={setEffects} />
+        <AnimatePresence>
+            { effects.map(effect =>
+                <Effect imageEffect={effect} setEffects={setEffects} key={effect.id} error={effectErrors[effect.id]} />
+            ) }
+        </AnimatePresence>
+        <AnimatePresence>
+            <EffectBar setEffects={setEffects} />
+        </AnimatePresence>
     </div>
 );

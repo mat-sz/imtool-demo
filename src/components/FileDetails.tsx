@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import Lightbox from 'react-image-lightbox';
+import { motion } from 'framer-motion';
 import { ImTool } from 'imtool/lib/ImTool';
 
+import { animationProps } from '../animationSettings';
 import { ImageEffect } from '../Effects';
 
 export interface FileDetailsProps {
@@ -39,7 +41,7 @@ export const FileDetails: React.FC<FileDetailsProps> = ({ tool, effects, inputUR
     }
 
     return (
-        <section className="details">
+        <motion.section {...animationProps} className="details">
             { lightboxSrc ?
             <Lightbox
                 mainSrc={lightboxSrc}
@@ -71,6 +73,6 @@ export const FileDetails: React.FC<FileDetailsProps> = ({ tool, effects, inputUR
                     { text }
                 </pre>
             ) : null}
-        </section>
+        </motion.section>
     );
 }

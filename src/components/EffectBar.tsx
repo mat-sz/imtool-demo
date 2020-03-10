@@ -1,7 +1,9 @@
 import React from 'react';
+import { v4 as uuid } from 'uuid';
+import { motion } from 'framer-motion';
 
 import { effects, Effect, ImageEffect } from '../Effects';
-import { v4 as uuid } from 'uuid';
+import { animationProps } from '../animationSettings';
 
 export interface EffectBarProps {
     setEffects: React.Dispatch<React.SetStateAction<ImageEffect[]>>
@@ -23,8 +25,8 @@ export const EffectBar: React.FC<EffectBarProps> = ({ setEffects }) => {
     };
 
     return (
-        <section className="button-bar">
+        <motion.section {...animationProps} className="button-bar">
             { effects.map((effect, i) => <EffectButton effect={effect} key={i} />) }
-        </section>
+        </motion.section>
     );
 }

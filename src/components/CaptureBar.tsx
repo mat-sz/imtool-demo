@@ -1,5 +1,8 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { fromWebcam, fromScreen, fromImage } from 'imtool';
+
+import { animationProps } from '../animationSettings';
 
 export interface CaptureBarProps {
     setImage: (url: string, source: string) => void,
@@ -39,11 +42,11 @@ export const CaptureBar: React.FC<CaptureBarProps> = ({ setImage, setError, setL
     };
 
     return (
-        <section className="button-bar">
+        <motion.section {...animationProps} className="button-bar">
             <span>...or capture from:</span>
             <button onClick={example}>Example image</button>
             <button onClick={webcam}>Webcam</button>
             <button onClick={screen}>Screen</button>
-        </section>
+        </motion.section>
     );
 }

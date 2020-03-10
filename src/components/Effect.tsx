@@ -1,5 +1,7 @@
 import React from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
+import { animationProps } from '../animationSettings';
 import { ImageEffect, effects, EffectArgument, EffectArgumentType } from '../Effects';
 
 export interface EffectProps {
@@ -78,16 +80,18 @@ export const Effect: React.FC<EffectProps> = ({ imageEffect, setEffects, error }
     }
 
     return (
-        <section className="effect">
+        <motion.section {...animationProps} className="effect">
             <div className="effect-header">
                 <h3>{ effect.name }</h3>
                 <button onClick={onClick}>Remove</button>
             </div>
-            { error ? 
-            <div className="error-bar">
-                { error }
-            </div>
-            : null }
+            <AnimatePresence>
+                { error ? 
+                <motion.div {...animationProps} className="error-bar">
+                    { error }
+                </motion.div>
+                : null }
+            </AnimatePresence>
             { effect.arguments ? 
             <table>
                 <tbody>
@@ -99,6 +103,6 @@ export const Effect: React.FC<EffectProps> = ({ imageEffect, setEffects, error }
                 </tbody>
             </table>
             : null }
-        </section>
+        </motion.section>
     )
 };
