@@ -1,17 +1,13 @@
-import React from 'react';
+import React from "react";
 
 export interface ErrorBarProps {
-    error: string | undefined
-};
+  error: string | undefined;
+}
 
 export const ErrorBar: React.FC<ErrorBarProps> = ({ error }) => {
-    if (!error) {
-        return null;
-    }
+  if (!error) {
+    return null;
+  }
 
-    return (
-        <section className="error-bar">
-            { error }
-        </section>
-    );
-}
+  return <section className="error-bar">{error}</section>;
+};
