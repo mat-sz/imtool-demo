@@ -98,4 +98,26 @@ export const effects: Effect[] = [
       },
     ],
   },
+  {
+    name: "Rotate (radians)",
+    fn: "rotate",
+    arguments: [
+      {
+        name: "Rotation (radians)",
+        type: EffectArgumentType.NUMBER,
+        defaultValue: 0,
+      },
+    ],
+  },
+  {
+    name: "Rotate (degrees)",
+    fn: "rotateDeg",
+    arguments: [
+      {
+        name: "Rotation (degrees)",
+        type: EffectArgumentType.NUMBER,
+        defaultValue: 0,
+      },
+    ],
+  },
 ];
